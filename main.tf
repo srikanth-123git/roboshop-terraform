@@ -1,6 +1,8 @@
 variable "components" {
-  default = ["frontend", "catalogue", "cart", "user", "shipping", "payment", "dispatch", "mongodb", "mysql", "rabbitmq", "redis"]
+  default = ["frontend", "mongodb"]
 }
+
+#default = ["frontend", "catalogue", "cart", "user", "shipping", "payment", "dispatch", "mongodb", "mysql", "rabbitmq", "redis"]
 
 resource "aws_instance" "instance" {
   count                  = length(var.components)
