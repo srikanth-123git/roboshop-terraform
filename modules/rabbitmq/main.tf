@@ -36,13 +36,13 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = [aws_security_group.main.id]
 
   root_block_device {
-    encrypted = true
+    encrypted  = true
     kms_key_id = var.kms_key_id
   }
 
   tags = {
-    Name    = var.component
-    env     = var.env
+    Name = var.component
+    env  = var.env
   }
 }
 
