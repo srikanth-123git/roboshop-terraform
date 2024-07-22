@@ -24,3 +24,6 @@ variable "prometheus_nodes" {}
 variable "instance_type" {}
 variable "max_capacity" {}
 variable "min_capacity" {}
+variable "certificate_arn" {}
+variable "zone_id" {}
+
