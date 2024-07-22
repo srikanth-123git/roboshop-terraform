@@ -1,27 +1,3 @@
-variable "components" {
-  default = ["frontend", "catalogue", "cart", "user", "shipping", "payment", "dispatch"]
-}
-
-resource "aws_instance" "instance" {
-  count                  = length(var.components)
-  ami                    = "ami-0b4f379183e5706b9"
-  instance_type          = "t3.small"
-  subnet_id              = module.vpc.backend_subnets[0]
-  tags = {
-    Name = var.components[count.index]
-  }
-}
-
-resource "aws_route53_record" "record" {
-  count   = length(var.components)
-  name    = var.components[count.index]
-  type    = "A"
-  zone_id = "Z0591896LOE9TNN6GUNS"
-  records = [aws_instance.instance[count.index].private_ip]
-  ttl     = 3
-}
-
-
 module "vpc" {
   source = "./modules/vpc"
 
@@ -98,5 +74,12 @@ module "elasticache" {
   server_app_port_sg_cidr = var.backend_subnets
   subnet_ids              = module.vpc.db_subnets
   vpc_id                  = module.vpc.vpc_id
+}
+
+module "eks" {
+  source     = "./modules/eks"
+  env        = var.env
+  subnet_ids = module.vpc.backend_subnets
+  kms_key_id = var.kms_key_id
 }
 
