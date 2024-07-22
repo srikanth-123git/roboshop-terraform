@@ -6,7 +6,7 @@ resource "aws_instance" "instance" {
   count                  = length(var.components)
   ami                    = "ami-031da9bb5f8457ab4"
   instance_type          = "t3.small"
-  vpc_security_group_ids = module.vpc.backend_subnets[0]
+  subnet_id              = module.vpc.backend_subnets[0]
   tags = {
     Name = var.components[count.index]
   }
