@@ -21,3 +21,6 @@ variable "bastion_nodes" {}
 variable "prometheus_nodes" {}
 
 
+variable "instance_type" {}
+variable "max_capacity" {}
+variable "min_capacity" {}
