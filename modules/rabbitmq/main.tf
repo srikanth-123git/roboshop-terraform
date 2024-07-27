@@ -66,10 +66,3 @@ resource "null_resource" "rabbitmq-setup" {
   }
 }
 
-resource "aws_route53_record" "server" {
-  name    = "${var.component}-${var.env}"
-  type    = "A"
-  zone_id = var.zone_id
-  records = [aws_instance.instance.private_ip]
-  ttl     = 30
-}
