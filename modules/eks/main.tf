@@ -75,3 +75,7 @@ EOF
   }
 }
 
+resource "aws_eks_addon" "addon-ebs" {
+  cluster_name = aws_eks_cluster.cluster.name
+  addon_name   = "aws-ebs-csi-driver"
+}
